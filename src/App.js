@@ -1,18 +1,18 @@
 import { useState } from "react";
-import Formpage from "./components/Formpage";
-import Showdata from "./components/Showdata";
+import Makeorder from "./componets/Makeorder";
+import Table from "./componets/Table";
 
 function App() {
-  const [products, setProduct] = useState([]);
-  function getItems(items) {
-    setProduct((prev) => {
-      return [...prev, items];
+  const [allorders, setorders] = useState([]);
+  const getUserorder = (order) => {
+    setorders((prev) => {
+      return [...prev, order];
     });
-  }
+  };
   return (
     <>
-      <Formpage onFormSummit={getItems} />
-      <Showdata products={products} />
+      <Makeorder onOrder={getUserorder} />
+      <Table allorders={allorders} />
     </>
   );
 }
