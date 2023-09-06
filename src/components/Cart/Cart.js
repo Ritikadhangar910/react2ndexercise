@@ -4,26 +4,46 @@ import classes from "./Cart.module.css";
 import CartContext from "../../store/cart-context";
 
 const Cart = (props) => {
-  let myusecontext = useContext(CartContext);
-  myusecontext = myusecontext.items;
+  const cartContext = useContext(CartContext);
+  const cartItems = cartContext.items;
+
+  function reduceItemsFun(id) {
+    cartContext.removeItem(id);
+  }
+
   const CartItems = (
     <ul className={classes["cart-items"]}>
-      {myusecontext.map((item) => {
-        return (
-          <li key={item.key}>
-            Name: {item.name} Price: {item.price} Quantity: {item.quantity}
+      {cartItems.map((item) => (
+        <div key={item.id}>
+          <li>
+            Name: {item.name} Price: {item.IncPrice.toFixed(2)} Quantity:
+            {item.quantity}
+            <button
+              onClick={() => {
+                reduceItemsFun(item.id);
+              }}
+            >
+              -
+            </button>
           </li>
-        );
-      })}
+        </div>
+      ))}
     </ul>
   );
+
+  let TotalAmount = 0;
+
+  for (const item of cartItems) {
+    TotalAmount += item.IncPrice;
+  }
+
   return (
     <>
       <Model>
         {CartItems}
         <div className={classes.total}>
           <span>Total Amount</span>
-          <span>35.62</span>
+          <span>{TotalAmount.toFixed(2)}</span>
         </div>
         <div className={classes.actions}>
           <button
