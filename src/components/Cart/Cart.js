@@ -1,18 +1,19 @@
+import { useContext } from "react";
 import Model from "../UI/Model";
 import classes from "./Cart.module.css";
+import CartContext from "../../store/cart-context";
 
 const Cart = (props) => {
+  let myusecontext = useContext(CartContext);
+  myusecontext = myusecontext.items;
   const CartItems = (
     <ul className={classes["cart-items"]}>
-      {[
-        {
-          id: "c1",
-          name: "sushi",
-          amount: 2,
-          price: 12.65,
-        },
-      ].map((item) => {
-        return <li>{item.name}</li>;
+      {myusecontext.map((item) => {
+        return (
+          <li key={item.key}>
+            Name: {item.name} Price: {item.price} Quantity: {item.quantity}
+          </li>
+        );
       })}
     </ul>
   );

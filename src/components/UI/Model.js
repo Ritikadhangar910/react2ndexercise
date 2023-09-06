@@ -9,7 +9,7 @@ const portalElement = document.getElementById("overlays");
 const Model = (props) => {
   return (
     <>
-      {ReactDOM.createPortal(Backdrop, portalElement)}
+      {ReactDOM.createPortal(<Backdrop />, portalElement)}
       {ReactDOM.createPortal(
         <div className={classes.modal}>
           <div className={classes.content}>{props.children}</div>
