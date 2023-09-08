@@ -16,7 +16,7 @@ const Cart = (props) => {
       {cartItems.map((item) => (
         <div key={item.id}>
           <li>
-            Name: {item.name} Price: {item.IncPrice.toFixed(2)} Quantity:
+            Name: {item.name} Price: ${item.IncPrice.toFixed(2)} Quantity:
             {item.quantity}
             <button
               onClick={() => {
@@ -43,7 +43,7 @@ const Cart = (props) => {
         {CartItems}
         <div className={classes.total}>
           <span>Total Amount</span>
-          <span>{TotalAmount.toFixed(2)}</span>
+          <span>${TotalAmount.toFixed(2)}</span>
         </div>
         <div className={classes.actions}>
           <button

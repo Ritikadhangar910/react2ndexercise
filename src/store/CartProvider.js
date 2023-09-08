@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import CartContext from "./cart-context";
+import { useEffect, useState } from "react";
 
 const CartProvider = (props) => {
   const [items, setItem] = useState([]);
@@ -27,13 +27,15 @@ const CartProvider = (props) => {
     setupdatedItems(groupedItemsArray);
   }, [items]);
   function removeItemToCardHandler(id) {
-    const allitems = [...updateditems];
+    let allitems = [...updateditems];
     for (const item of allitems) {
       if (id === item.id) {
         item.quantity = Number(item.quantity) - 1;
         item.IncPrice = Number(item.IncPrice) - Number(item.price);
         if (Number(item.quantity) === 0) {
-          allitems.splice(item, 1);
+          allitems = allitems.filter((item) => {
+            return item.id !== id;
+          });
         }
         setupdatedItems(allitems);
       }

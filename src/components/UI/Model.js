@@ -1,7 +1,15 @@
 import ReactDOM from "react-dom";
 import classes from "./Model.module.css";
-const Backdrop = () => {
+const Backdrop = (props) => {
   return <div className={classes.backdrop} />;
+};
+
+const ModalOverlay = (props) => {
+  return (
+    <div className={classes.modal}>
+      <div className={classes.content}>{props.children}</div>
+    </div>
+  );
 };
 
 const portalElement = document.getElementById("overlays");
@@ -11,12 +19,11 @@ const Model = (props) => {
     <>
       {ReactDOM.createPortal(<Backdrop />, portalElement)}
       {ReactDOM.createPortal(
-        <div className={classes.modal}>
-          <div className={classes.content}>{props.children}</div>
-        </div>,
+        <ModalOverlay>{props.children}</ModalOverlay>,
         portalElement
       )}
     </>
   );
 };
+
 export default Model;
