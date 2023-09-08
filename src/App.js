@@ -1,25 +1,21 @@
 import { useState } from "react";
-import Cart from "./components/Cart/Cart";
-import Header from "./components/Layout/Header";
-import Meals from "./components/Meals/Meals";
-import CartProvider from "./store/CartProvider";
+import Buycandy from "./components/BuyCandy";
+import Card from "./components/Card";
+import CartProvider from "./store/CardProvider";
+import Allcandies from "./components/Allcandies";
 function App() {
-  const [cortIsShown, setCartIsShown] = useState(false);
-  function CardShownFun() {
-    setCartIsShown(true);
-  }
-  function CardHideFun() {
-    setCartIsShown(false);
+  const [candies, setcandies] = useState([]);
+  function ShowCandies(candy) {
+    setcandies((prev) => {
+      return [...prev, candy];
+    });
   }
   return (
     <CartProvider>
-      {cortIsShown && <Cart onClickClose={CardHideFun} />}
-      <Header onIconClick={CardShownFun} />
-      <main>
-        <Meals />
-      </main>
+      <Card />
+      <Buycandy onaddCandy={ShowCandies} />
+      <Allcandies candies={candies} />
     </CartProvider>
   );
 }
-
 export default App;
